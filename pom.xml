@@ -15,6 +15,9 @@
         <ecommerce.version.lombok> 1.18.26 </ecommerce.version.lombok>
         <ecommerce.version.commons-lang3> 3.12.0 </ecommerce.version.commons-lang3>
         <ecommerce.version.poi> 5.2.2 </ecommerce.version.poi>
+        <ecommerce.version.junit-jupiter> 5.9.2 </ecommerce.version.junit-jupiter>
+        <ecommerce.version.mockito-core> 5.2.0 </ecommerce.version.mockito-core>
+        <ecommerce.version.mockito-junit-jupiter> 5.2.0 </ecommerce.version.mockito-junit-jupiter>
     </properties>
 
     <dependencies>
@@ -32,6 +35,21 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>${ecommerce.version.poi}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${ecommerce.version.junit-jupiter}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${ecommerce.version.mockito-core}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${ecommerce.version.mockito-junit-jupiter}</version>
         </dependency>
     </dependencies>
 
