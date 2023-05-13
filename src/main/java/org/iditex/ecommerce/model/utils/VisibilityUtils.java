@@ -2,12 +2,14 @@ package org.iditex.ecommerce.model.utils;
 
 import org.iditex.ecommerce.model.entities.Product;
 import org.iditex.ecommerce.model.entities.Size;
+import org.iditex.ecommerce.model.entities.Stock;
 import org.iditex.ecommerce.model.repositories.ProductRepository;
 import org.iditex.ecommerce.model.repositories.SizeRepository;
 import org.iditex.ecommerce.model.repositories.StockRepository;
 
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class VisibilityUtils {
 
@@ -26,14 +28,25 @@ public final class VisibilityUtils {
     }
 
     public List<Product> getVisibleProductsSortedBySequence() {
-        return Collections.emptyList();
+        return productRepository.findAll()
+                .stream()
+                .filter(this::isVisible)
+                .sorted(Comparator.comparing(Product::getSequence))
+                .collect(Collectors.toList());
     }
 
     private boolean isVisible(Product product) {
-        return false;
+        return !sizeRepository.findByProductId(product.getId())
+                .stream()
+                .filter(this::haveStock)
+                .map(Size::isSpecial)
+                .reduce(true, Boolean::logicalAnd);
     }
 
     private boolean haveStock(Size size) {
-        return false;
+        return size.isBackSoon() || stockRepository.findBySizeId(size.getId())
+                .map(Stock::getQuantity)
+                .map(quantity -> quantity.compareTo(0L) > 0)
+                .orElse(false);
     }
 }
