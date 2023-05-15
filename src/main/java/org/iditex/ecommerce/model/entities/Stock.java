@@ -1,15 +1,16 @@
 package org.iditex.ecommerce.model.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NonNull;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Stock {
 
-    @NonNull
     private Long sizeId;
 
-    @NonNull
     private Long quantity;
 
 }
