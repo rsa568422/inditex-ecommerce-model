@@ -2,10 +2,10 @@ package org.iditex.ecommerce.model.repositories;
 
 import org.iditex.ecommerce.model.entities.Size;
 
-import java.util.List;
+import java.util.Set;
 
 public interface SizeRepository extends Repository<Size> {
 
-    List<Size> findByProductId(Long productId);
+    Set<Size> findByProductId(Long productId);
 
 }
