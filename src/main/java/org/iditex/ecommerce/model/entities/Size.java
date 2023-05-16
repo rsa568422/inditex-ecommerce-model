@@ -1,14 +1,10 @@
 package org.iditex.ecommerce.model.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Optional;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Size {
 
     private Long id;
@@ -20,6 +16,10 @@ public class Size {
     private boolean special;
 
     private Optional<Stock> stock;
+
+    public Size() {
+        this.setStock(Optional.empty());
+    }
 
     public Size(Long id, Long productId, boolean backSoon, boolean special) {
         this.id = id;
