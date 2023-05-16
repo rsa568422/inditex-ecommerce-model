@@ -15,8 +15,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -97,6 +97,22 @@ class SizeTest {
             verify(stock, times(1)).getQuantity();
             assertTrue(actual);
         }
+
+        @Test
+        void testConstructor() {
+            Size a = new Size(11L, 1L, true, false, stock);
+            Size b = new Size();
+            b.setId(11L);
+            b.setProductId(1L);
+            b.setBackSoon(true);
+            b.setSpecial(false);
+            b.setStock(Optional.of(stock));
+
+            assertAll(
+                    () -> assertEquals(a, b),
+                    () -> assertEquals(b, a)
+            );
+        }
     }
 
     @Nested
@@ -117,6 +133,40 @@ class SizeTest {
             Long id = Long.valueOf(param);
 
             assertFalse(SizeData.SIZES.get(id).haveStock());
+        }
+
+        @Test
+        void testConstructorWithStock() {
+            Stock aStock = new Stock(11L, 0L);
+            Stock bStock = new Stock(11L, 0L);
+
+            Size a = new Size(11L, 1L, true, false, aStock);
+            Size b = new Size();
+            b.setId(11L);
+            b.setProductId(1L);
+            b.setBackSoon(true);
+            b.setSpecial(false);
+            b.setStock(Optional.of(bStock));
+
+            assertAll(
+                    () -> assertEquals(a, b),
+                    () -> assertEquals(b, a)
+            );
+        }
+
+        @Test
+        void testConstructorWithoutStock() {
+            Size a = new Size(11L, 1L, true, false);
+            Size b = new Size();
+            b.setId(11L);
+            b.setProductId(1L);
+            b.setBackSoon(true);
+            b.setSpecial(false);
+
+            assertAll(
+                    () -> assertEquals(a, b),
+                    () -> assertEquals(b, a)
+            );
         }
 
     }
